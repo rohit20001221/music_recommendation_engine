@@ -1,0 +1,10 @@
+FT.CREATE "idx:music"
+    ON HASH
+        PREFIX 1 "music:"
+    SCHEMA
+        "url" TEXT
+        "vec" VECTOR HNSW
+            6
+            "TYPE" "FLOAT32"
+            "DIM" 200
+            "DISTANCE_METRIC" "COSINE"

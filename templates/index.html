@@ -1,0 +1,25 @@
+<script>
+    async function submitForm(event) {
+        event.preventDefault()
+
+        const fd = new FormData(event.currentTarget)
+        const data = await (await fetch("{{url_for('get_recommendations')}}", {
+            method: 'POST',
+            body: fd,
+        })).json()
+
+        document.getElementById("results").innerHTML = ""
+        data["results"].forEach((url) => {
+            document.getElementById("results").innerHTML += `<a href="${url}">${url}</a><br/>`
+        })
+
+        return false
+    }
+</script>
+
+<form action="#" onsubmit="submitForm(event)" enctype="multipart/form-data">
+    <input type="file" name="music_file" id="">
+    <button type="submit">submit</button>
+</form>
+
+<div id="results"></div>
